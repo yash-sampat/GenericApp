@@ -1,5 +1,6 @@
 # GenericApp
 Generic Login App
+
 Retrofit Api Calls With MVVM, Dagger, Repository Pattern (Clean Architecture)
 
 (Kotlin, Coroutines, LiveData, 
