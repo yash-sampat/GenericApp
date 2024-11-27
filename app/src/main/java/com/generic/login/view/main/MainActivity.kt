@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
             ?: return
 
         with(navHostFragment.navController) {
-            appBarConfiguration = AppBarConfiguration(graph)
+            //appBarConfiguration = AppBarConfiguration(graph)
             appBarConfiguration = AppBarConfiguration(
                 setOf(
                     R.id.loginFragment,
