@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorbackground"
+            tools:context="com.generic.login.view.main.MainActivity">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/iv_applogo_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_50sdp"
+                android:text="@string/appNameLogo"
+                android:textAllCaps="true"
+                android:textColor="@color/colortext"
+                android:textSize="@dimen/_20sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </androidx.appcompat.widget.AppCompatTextView>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_emailormobile_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_50sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:hint="@string/email_or_phone_number"
+                android:textColorHint="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/iv_applogo_login">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_emailormobile_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_box"
+                    android:fontFamily="@font/open_sans_regular"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/black"
+                    android:text="" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tverror_emailormobile_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@drawable/bg_cut_shape"
+                android:fontFamily="@font/open_sans_regular"
+                android:gravity="start"
+                android:padding="@dimen/_2sdp"
+                android:paddingStart="@dimen/_11sdp"
+                android:text="@string/email_is_required"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/til_emailormobile_view">
+
+            </androidx.appcompat.widget.AppCompatTextView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_password_viewregister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@drawable/background_box"
+                android:hint="@string/password"
+                android:textColorHint="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/tverror_emailormobile_register">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_password_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_box"
+                    android:fontFamily="@font/open_sans_regular"
+                    android:inputType="textPassword"
+                    android:textColor="@color/black"
+                    android:maxLength="12"
+                    android:text="" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tverror_password_viewregister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@drawable/bg_cut_shape"
+                android:fontFamily="@font/open_sans_regular"
+                android:gravity="start"
+                android:padding="@dimen/_2sdp"
+                android:paddingStart="@dimen/_11sdp"
+                android:text="@string/password_is_required"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/til_password_viewregister">
+
+            </androidx.appcompat.widget.AppCompatTextView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_age_viewregister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@drawable/background_box"
+                android:hint="@string/age"
+                android:textColorHint="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/tverror_password_viewregister">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_age_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_box"
+                    android:fontFamily="@font/open_sans_regular"
+                    android:inputType="number"
+                    android:textColor="@color/black"
+                    android:maxLength="2"
+                    android:text="" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tverror_age_viewregister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@drawable/bg_cut_shape"
+                android:fontFamily="@font/open_sans_regular"
+                android:gravity="start"
+                android:padding="@dimen/_2sdp"
+                android:paddingStart="@dimen/_11sdp"
+                android:text="@string/age_is_required"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/til_age_viewregister">
+
+            </androidx.appcompat.widget.AppCompatTextView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tverror2_age_viewregister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@drawable/bg_cut_shape"
+                android:fontFamily="@font/open_sans_regular"
+                android:gravity="start"
+                android:padding="@dimen/_2sdp"
+                android:paddingStart="@dimen/_11sdp"
+                android:text="@string/age_above_18"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/til_age_viewregister">
+
+            </androidx.appcompat.widget.AppCompatTextView>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/open_sans_semibold"
+                android:padding="@dimen/_9sdp"
+                android:text="@string/register"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/colorbgbutton"
+                app:cornerRadius="@dimen/_3sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tverror_age_viewregister">
+
+            </com.google.android.material.button.MaterialButton>
+
+            <ProgressBar
+                android:id="@+id/progressbar_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/colorgray"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

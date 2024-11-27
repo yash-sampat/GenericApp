@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="productsModel"
+            type="com.generic.login.model.products.ProductData" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:id="@+id/iv_glide"
+            android:layout_marginTop="15dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="15dp"
+            android:scaleType="fitXY">
+        </ImageView>
+
+    </LinearLayout>
+
+</layout>
+
