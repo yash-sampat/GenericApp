@@ -13,5 +13,7 @@ interface ImageService {
         @Query("q") searchQuery: String?,
         @Query("image_type") type: String?,
         @Query("pretty") indentJSON: Boolean?,
+        @Query("per_page") pageSize: Int?,
+        @Query("editors_choice") editorsChoice: Boolean?
     ): Response<DataModelProductStatus>
 }

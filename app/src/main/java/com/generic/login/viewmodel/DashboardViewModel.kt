@@ -39,7 +39,7 @@ class DashboardViewModel @Inject constructor(application: Application,
         try {
             if (hasInternetConnection<LoginApp>()) {
                 val response = repository.getPhotos(PIXABAY_API_KEY,
-                    "sports+shoes", "photo", true)
+                    "sports shoes", "photo", true, 200, true)
                 if (response.isSuccessful) {
                     if (response.code() == 200) {
                         //val successresponse: DataModelProductStatus? = response.body()
