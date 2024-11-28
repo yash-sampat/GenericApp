@@ -22,13 +22,11 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class DashboardFragment : BaseFragment<FragmentDashboardBinding, DashboardViewModel>() {
     private lateinit var recyclerView: RecyclerView
-    private lateinit var manager: RecyclerView.LayoutManager
     private lateinit var productAdapter: RecyclerView.Adapter<*>
     override val viewModel: DashboardViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        manager = LinearLayoutManager(activity)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,8 +48,8 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, DashboardViewMo
                         response.data?.let { productResponse ->
                             //response.message?.let { toast(it) }
                             recyclerView = rv_dashboard.apply{
-                                productAdapter = ProductAdapter(productResponse.hits)
-                                layoutManager = manager
+                                productAdapter = ProductAdapter(productResponse.hits, this@DashboardFragment)
+                                layoutManager = LinearLayoutManager(activity)
                                 adapter = productAdapter
                             }
                         }
