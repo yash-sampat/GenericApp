@@ -1,12 +1,9 @@
 package com.generic.login.view.adapters
 
-import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -30,7 +27,12 @@ class ProductAdapter(private val data: List<Product>, private val fragment: Frag
             Glide.with(view.context).load(product.previewURL).centerCrop().into(view.imageView)
 
             view.constraintLayout.setOnClickListener{
-                fragment.findNavController().navigate(R.id.action_dashboardFragment_to_detailFragment)
+                val bundle = Bundle()
+                bundle.putString("largeImageURL", product.largeImageURL)
+                bundle.putInt("size", product.imageSize)
+                bundle.putString("type", product.type)
+                bundle.putString("tags", product.tags)
+                fragment.findNavController().navigate(R.id.action_dashboardFragment_to_detailFragment, bundle)
             }
         }
     }

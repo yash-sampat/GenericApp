@@ -5,12 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.generic.login.R
+import kotlinx.android.synthetic.main.fragment_product_detail.view.imageSize
+import kotlinx.android.synthetic.main.fragment_product_detail.view.imageTags
+import kotlinx.android.synthetic.main.fragment_product_detail.view.imageType
+import kotlinx.android.synthetic.main.fragment_product_detail.view.productDetailImage
+import kotlinx.android.synthetic.main.item_recycler.view.imageView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_PARAM1 = "largeImageURL"
+private const val ARG_PARAM2 = "size"
+private const val ARG_PARAM3 = "type"
+private const val ARG_PARAM4 = "tags"
 
 /**
  * A simple [Fragment] subclass.
@@ -20,13 +28,17 @@ private const val ARG_PARAM2 = "param2"
 class ProductDetailFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
-    private var param2: String? = null
+    private var param2: Int? = null
+    private var param3: String? = null
+    private var param4: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            param2 = it.getInt(ARG_PARAM2)
+            param3 = it.getString(ARG_PARAM3)
+            param4 = it.getString(ARG_PARAM4)
         }
     }
 
@@ -36,6 +48,15 @@ class ProductDetailFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_product_detail, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        Glide.with(view.context).load(param1).centerCrop().into(view.productDetailImage)
+        view.imageSize.text = "Size: " + param2.toString()
+        view.imageType.text = "Type: " + param3
+        view.imageTags.text = "Tags: " + param4
     }
 
     companion object {

@@ -10,4 +10,8 @@ data class Product(
     @SerializedName("views") val views: Int,
     @SerializedName("likes") val likes: Int,
     @SerializedName("comments") val comments: Int,
+    @SerializedName("collections") val collections: Int,
+    @SerializedName("downloads") val downloads: Int,
+    @SerializedName("imageSize") val imageSize: Int,
+    @SerializedName("type") val type: String,
 )
