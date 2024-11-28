@@ -8,6 +8,7 @@ Dagger-Hilt , MVVM, Repository Pattern,
 Retrofit 2, Glide, Custom Validation)
 
 Gradle version - 7.5
+
 AGP version - 7.4.2
 
 

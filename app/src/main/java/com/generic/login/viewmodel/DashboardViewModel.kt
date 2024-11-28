@@ -9,6 +9,7 @@ import com.generic.login.app.LoginApp
 import com.generic.login.model.login.DataModelProductStatus
 import com.generic.login.repository.PhotoRepository
 import com.generic.login.utils.Event
+import com.generic.login.utils.PIXABAY_API_KEY
 import com.generic.login.utils.Resource
 import com.generic.login.utils.hasInternetConnection
 import com.generic.login.utils.toast
@@ -37,19 +38,19 @@ class DashboardViewModel @Inject constructor(application: Application,
         _productData.postValue(Event(Resource.Loading()))
         try {
             if (hasInternetConnection<LoginApp>()) {
-                val response = repository.getPhotos("47308900-67970c2abf223f8c29bb472de",
+                val response = repository.getPhotos(PIXABAY_API_KEY,
                     "sports+shoes", "photo", true)
                 if (response.isSuccessful) {
-                    if (response.body()!!.status == 200) {
+                    if (response.body()!!.code == 200) {
                         val successresponse: DataModelProductStatus? = response.body()
                         toast(getApplication(), successresponse!!.message)
                         _productData.postValue(Event(Resource.Success(response.body()!!)))
-                    } else if (response.body()!!.status == 401) {
+                    } else if (response.body()!!.code == 401) {
 
                         val errorresponse: DataModelProductStatus? = response.body()
                         toast(getApplication(), errorresponse!!.error)
 
-                    } else if (response.body()!!.status == 412) {
+                    } else if (response.body()!!.code == 412) {
 
                         val errorresponse: DataModelProductStatus? = response.body()
                         toast(getApplication(), errorresponse!!.error)

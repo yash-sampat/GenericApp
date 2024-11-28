@@ -34,7 +34,6 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, DashboardViewMo
     ) = FragmentDashboardBinding.inflate(inflater, container, false)
 
     private fun doInit() {
-        viewModel.getProducts()
         viewModel.productData.observe(viewLifecycleOwner, Observer { event ->
             event.getContentIfNotHandled()?.let { response ->
                 when (response) {
@@ -55,6 +54,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, DashboardViewMo
                 }
             }
         })
+        viewModel.getProducts()
     }
 
     private fun showProgressBar() {
