@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.generic.login.app.LoginApp
-import com.generic.login.model.login.DataModelProductStatus
+import com.generic.login.model.products.DataModelProductStatus
 import com.generic.login.repository.PhotoRepository
 import com.generic.login.utils.Event
 import com.generic.login.utils.PIXABAY_API_KEY
@@ -41,16 +41,16 @@ class DashboardViewModel @Inject constructor(application: Application,
                 val response = repository.getPhotos(PIXABAY_API_KEY,
                     "sports+shoes", "photo", true)
                 if (response.isSuccessful) {
-                    if (response.body()!!.code == 200) {
-                        val successresponse: DataModelProductStatus? = response.body()
-                        toast(getApplication(), successresponse!!.message)
+                    if (response.code() == 200) {
+                        //val successresponse: DataModelProductStatus? = response.body()
+                        //toast(getApplication(), successresponse!!.hits.toString())
                         _productData.postValue(Event(Resource.Success(response.body()!!)))
-                    } else if (response.body()!!.code == 401) {
+                    } else if (response.code() == 401) {
 
                         val errorresponse: DataModelProductStatus? = response.body()
                         toast(getApplication(), errorresponse!!.error)
 
-                    } else if (response.body()!!.code == 412) {
+                    } else if (response.code() == 412) {
 
                         val errorresponse: DataModelProductStatus? = response.body()
                         toast(getApplication(), errorresponse!!.error)

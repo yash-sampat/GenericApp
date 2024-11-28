@@ -1,6 +1,6 @@
 package com.generic.login.webapi
 
-import com.generic.login.model.login.DataModelProductStatus
+import com.generic.login.model.products.DataModelProductStatus
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

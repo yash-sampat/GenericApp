@@ -1,6 +1,6 @@
 package com.generic.login.repository
 
-import com.generic.login.model.login.DataModelProductStatus
+import com.generic.login.model.products.DataModelProductStatus
 import com.generic.login.webapi.ImageService
 import retrofit2.Response
 import javax.inject.Inject
