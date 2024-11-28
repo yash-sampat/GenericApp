@@ -32,6 +32,12 @@ class ProductAdapter(private val data: List<Product>, private val fragment: Frag
                 bundle.putInt("size", product.imageSize)
                 bundle.putString("type", product.type)
                 bundle.putString("tags", product.tags)
+                bundle.putString("user", product.user)
+                bundle.putInt("views", product.views)
+                bundle.putInt("likes", product.likes)
+                bundle.putInt("comments", product.comments)
+                bundle.putInt("favorites", product.collections)
+                bundle.putInt("downloads", product.downloads)
                 fragment.findNavController().navigate(R.id.action_dashboardFragment_to_detailFragment, bundle)
             }
         }
