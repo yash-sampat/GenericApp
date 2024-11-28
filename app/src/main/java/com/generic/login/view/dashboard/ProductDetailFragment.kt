@@ -11,7 +11,6 @@ import kotlinx.android.synthetic.main.fragment_product_detail.view.imageSize
 import kotlinx.android.synthetic.main.fragment_product_detail.view.imageTags
 import kotlinx.android.synthetic.main.fragment_product_detail.view.imageType
 import kotlinx.android.synthetic.main.fragment_product_detail.view.productDetailImage
-import kotlinx.android.synthetic.main.item_recycler.view.imageView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -54,9 +53,9 @@ class ProductDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         Glide.with(view.context).load(param1).centerCrop().into(view.productDetailImage)
-        view.imageSize.text = "Size: " + param2.toString()
-        view.imageType.text = "Type: " + param3
-        view.imageTags.text = "Tags: " + param4
+        view.imageSize.text = String.format("Size: %s", param2.toString())
+        view.imageType.text = String.format("Type: %s", param3)
+        view.imageTags.text = String.format("Tags: %s", param4)
     }
 
     companion object {
