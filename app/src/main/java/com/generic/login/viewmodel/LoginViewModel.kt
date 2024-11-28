@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.generic.login.app.LoginApp
 import com.generic.login.model.login.DataModelLoginBody
 import com.generic.login.model.login.DataModelLoginStatus
-import com.generic.login.repository.LoginRepository
+import com.generic.login.repository.MainApiRepository
 import com.generic.login.utils.Event
 import com.generic.login.utils.Resource
 import com.generic.login.utils.hasInternetConnection
@@ -24,7 +24,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     application: Application,
-    private val repository: LoginRepository
+    private val repository: MainApiRepository
 ) :
     AndroidViewModel(application) {
     private val _loginData = MutableLiveData<Event<Resource<DataModelLoginStatus>>>()
@@ -61,7 +61,7 @@ class LoginViewModel @Inject constructor(
                 }
             } else {
                 _loginData.postValue(Event(Resource.Error("No Internet Connection")))
-                toast(getApplication(), "No Internet Connection.!")
+                toast(getApplication(), "No Internet Connection!")
             }
         } catch (e: HttpException) {
             when (e) {
@@ -75,7 +75,7 @@ class LoginViewModel @Inject constructor(
             when (t) {
                 is IOException -> {
                     _loginData.postValue(Event(Resource.Error(t.message!!)))
-                    toast(getApplication(), t.message!!)
+                    //toast(getApplication(), t.message!!)
                 }
 
             }

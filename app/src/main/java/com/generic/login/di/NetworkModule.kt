@@ -1,6 +1,6 @@
 package com.generic.login.di
 
-import com.generic.login.repository.LoginRepository
+import com.generic.login.repository.MainApiRepository
 import com.generic.login.repository.PhotoRepository
 import com.generic.login.utils.BASE_URL
 import com.generic.login.utils.PIXABAY_SOURCE
@@ -96,8 +96,8 @@ object NetworkModule {
     @PrimaryApi
     fun providesLoginRepository(
         apiService: ApiService
-    ): LoginRepository {
-        return LoginRepository(apiService)
+    ): MainApiRepository {
+        return MainApiRepository(apiService)
     }
 
     //photos

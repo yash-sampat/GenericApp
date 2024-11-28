@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.generic.login.app.LoginApp
 import com.generic.login.model.register.DataModelRegisterBody
 import com.generic.login.model.register.DataModelRegisterStatus
-import com.generic.login.repository.RegisterRepository
+import com.generic.login.repository.MainApiRepository
 import com.generic.login.utils.Event
 import com.generic.login.utils.Resource
 import com.generic.login.utils.hasInternetConnection
@@ -24,7 +24,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
     application: Application,
-    private val repository: RegisterRepository
+    private val repository: MainApiRepository
 ) :
     AndroidViewModel(application) {
     private val _registerData = MutableLiveData<Event<Resource<DataModelRegisterStatus>>>()
@@ -61,7 +61,7 @@ class RegisterViewModel @Inject constructor(
                 }
             } else {
                 _registerData.postValue(Event(Resource.Error("No Internet Connection")))
-                toast(getApplication(), "No Internet Connection.!")
+                toast(getApplication(), "No Internet Connection!")
             }
         } catch (e: HttpException) {
             when (e) {
@@ -75,7 +75,7 @@ class RegisterViewModel @Inject constructor(
             when (t) {
                 is IOException -> {
                     _registerData.postValue(Event(Resource.Error(t.message!!)))
-                    toast(getApplication(), t.message!!)
+                    //toast(getApplication(), t.message!!)
                 }
 
             }
