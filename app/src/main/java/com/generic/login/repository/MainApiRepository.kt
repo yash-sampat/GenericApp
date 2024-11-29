@@ -14,7 +14,7 @@ class MainApiRepository @Inject constructor(private val apiService: ApiService) 
         return apiService.getLogin(dataModelLoginBody)
     }
 
-    suspend fun getRegistration(dataModelLoginBody: DataModelRegisterBody): Response<DataModelRegisterStatus> {
-        return apiService.getRegistration(dataModelLoginBody)
+    suspend fun getRegistration(dataModelRegisterBody: DataModelRegisterBody): Response<DataModelRegisterStatus> {
+        return apiService.getRegistration(dataModelRegisterBody)
     }
 }

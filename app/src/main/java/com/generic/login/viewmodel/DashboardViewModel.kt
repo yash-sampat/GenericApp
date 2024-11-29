@@ -61,7 +61,7 @@ class DashboardViewModel @Inject constructor(application: Application,
                 }
             } else {
                 _productData.postValue(Event(Resource.Error("No Internet Connection")))
-                toast(getApplication(), "No Internet Connection.!")
+                toast(getApplication(), "No Internet Connection!")
             }
         } catch (e: HttpException) {
             when (e) {
