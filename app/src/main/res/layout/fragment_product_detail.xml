@@ -67,6 +67,9 @@
 
                 <ImageView
                     android:id="@+id/productDetailImage"
+                    android:adjustViewBounds="true"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 </ImageView>

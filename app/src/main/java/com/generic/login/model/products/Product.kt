@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Product(
     @SerializedName("previewURL") val previewURL: String,
-    @SerializedName("largeImageURL") val largeImageURL: String,
+    @SerializedName("webformatURL") val webformatURL: String,
     @SerializedName("user") val user: String,
     @SerializedName("tags") val tags: String,
     @SerializedName("views") val views: Int,

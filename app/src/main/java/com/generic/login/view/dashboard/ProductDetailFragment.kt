@@ -35,7 +35,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding, Product
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Glide.with(view.context).load(product.largeImageURL).centerCrop().into(view.productDetailImage)
+        Glide.with(view.context).load(product.webformatURL).centerCrop().into(view.productDetailImage)
         binding.apply {
             productModel = product
         }
