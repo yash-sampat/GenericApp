@@ -8,7 +8,7 @@
 
         <variable
             name="productsModel"
-            type="com.generic.login.model.products.ProductData" />
+            type="com.generic.login.model.products.Product" />
 
     </data>
 
@@ -43,6 +43,7 @@
                 android:fontFamily="sans-serif"
                 android:textColor="#212121"
                 android:textSize="15sp"
+                android:text="@{productsModel.tags}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -54,6 +55,7 @@
                 android:fontFamily="sans-serif"
                 android:textColor="@android:color/holo_blue_light"
                 android:textSize="14sp"
+                android:text="@{productsModel.user}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/tvTitle"
                 app:layout_constraintStart_toStartOf="@+id/tvTitle"

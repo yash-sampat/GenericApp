@@ -1,7 +1,10 @@
 package com.generic.login.model.products
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Product(
     @SerializedName("previewURL") val previewURL: String,
     @SerializedName("largeImageURL") val largeImageURL: String,
@@ -14,4 +17,4 @@ data class Product(
     @SerializedName("downloads") val downloads: Int,
     @SerializedName("imageSize") val imageSize: Int,
     @SerializedName("type") val type: String,
-)
+): Parcelable

@@ -48,7 +48,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, DashboardViewMo
                         response.data?.let { productResponse ->
                             //response.message?.let { toast(it) }
                             recyclerView = rv_dashboard.apply{
-                                productAdapter = ProductAdapter(productResponse.hits, this@DashboardFragment)
+                                productAdapter = ProductAdapter(productResponse.hits)
                                 layoutManager = LinearLayoutManager(activity)
                                 adapter = productAdapter
                             }

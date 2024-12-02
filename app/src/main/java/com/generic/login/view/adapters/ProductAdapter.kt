@@ -1,52 +1,36 @@
 package com.generic.login.view.adapters
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.generic.login.R
+import com.generic.login.databinding.ItemRecyclerBinding
 import com.generic.login.model.products.Product
-import kotlinx.android.synthetic.main.item_recycler.view.constraintLayout
-import kotlinx.android.synthetic.main.item_recycler.view.imageView
-import kotlinx.android.synthetic.main.item_recycler.view.tvDescription
-import kotlinx.android.synthetic.main.item_recycler.view.tvTitle
+import com.generic.login.view.dashboard.DashboardFragmentDirections
 
 
-class ProductAdapter(private val data: List<Product>, private val fragment: Fragment) : RecyclerView.Adapter<ProductAdapter.ViewHolder>()  {
+class ProductAdapter(private val data: List<Product>) : RecyclerView.Adapter<ProductAdapter.ViewHolder>()  {
 
-    class ViewHolder(val view: View, val fragment: Fragment): RecyclerView.ViewHolder(view){
+    class ViewHolder(val binding: ItemRecyclerBinding): RecyclerView.ViewHolder(binding.root){
 
-        fun bind(product: Product, position: Int){
-            view.tvTitle.text = product.tags
-            view.tvDescription.text = product.user
+        fun bind(product: Product, position: Int) = with(binding){
+            productsModel = product
+            Glide.with(binding.root).load(product.previewURL).centerCrop().into(binding.imageView)
 
-            Glide.with(view.context).load(product.previewURL).centerCrop().into(view.imageView)
-
-            view.constraintLayout.setOnClickListener{
-                val bundle = Bundle()
-                bundle.putString("largeImageURL", product.largeImageURL)
-                bundle.putInt("size", product.imageSize)
-                bundle.putString("type", product.type)
-                bundle.putString("tags", product.tags)
-                bundle.putString("user", product.user)
-                bundle.putInt("views", product.views)
-                bundle.putInt("likes", product.likes)
-                bundle.putInt("comments", product.comments)
-                bundle.putInt("favorites", product.collections)
-                bundle.putInt("downloads", product.downloads)
-
-                fragment.findNavController().navigate(R.id.action_dashboardFragment_to_detailFragment, bundle)
+            binding.root.setOnClickListener{
+                val direction = DashboardFragmentDirections.actionDashboardFragmentToDetailFragment(product)
+                it.findNavController().navigate(direction)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_recycler, parent, false)
-        return ViewHolder(v, fragment)
+        //val v = LayoutInflater.from(parent.context).inflate(R.layout.item_recycler, parent, false)
+        val v = ItemRecyclerBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
+        return ViewHolder(v)
     }
 
     override fun getItemCount(): Int {

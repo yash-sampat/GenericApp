@@ -73,6 +73,14 @@
         android:id="@+id/productDetailFragment"
         android:name="com.generic.login.view.dashboard.ProductDetailFragment"
         android:label="Product Detail"
-        tools:layout="@layout/fragment_product_detail"/>
+        tools:layout="@layout/fragment_product_detail">
+
+        <argument
+            android:name="product"
+            app:argType="com.generic.login.model.products.Product">
+
+        </argument>
+
+    </fragment>
 
 </navigation>
