@@ -5,10 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.generic.login.R
 import com.generic.login.databinding.FragmentProductDetailBinding
 import com.generic.login.model.products.Product
 import com.generic.login.view.base.BaseFragment

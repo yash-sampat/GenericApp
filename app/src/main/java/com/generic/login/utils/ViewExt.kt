@@ -10,8 +10,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.AndroidViewModel
-import java.text.SimpleDateFormat
-import java.util.*
 
 fun View.show() {
     visibility = View.VISIBLE
