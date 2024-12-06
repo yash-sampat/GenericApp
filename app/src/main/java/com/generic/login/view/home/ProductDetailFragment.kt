@@ -1,4 +1,4 @@
-package com.generic.login.view.dashboard
+package com.generic.login.view.home
 
 import android.os.Bundle
 import android.view.LayoutInflater

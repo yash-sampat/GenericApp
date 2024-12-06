@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.generic.login.databinding.ItemRecyclerBinding
 import com.generic.login.model.products.Product
-import com.generic.login.view.dashboard.DashboardFragmentDirections
+import com.generic.login.view.home.HomeFragmentDirections
 
 
 class ProductAdapter(diffCallback: DiffUtil.ItemCallback<Product>) : PagingDataAdapter<Product, ProductAdapter.ViewHolder>(
@@ -23,7 +23,7 @@ class ProductAdapter(diffCallback: DiffUtil.ItemCallback<Product>) : PagingDataA
             Glide.with(binding.root).load(product.previewURL).centerCrop().into(binding.imageView)
 
             binding.root.setOnClickListener{
-                val direction = DashboardFragmentDirections.actionDashboardFragmentToDetailFragment(product)
+                val direction = HomeFragmentDirections.actionDashboardFragmentToDetailFragment(product)
                 it.findNavController().navigate(direction)
             }
         }

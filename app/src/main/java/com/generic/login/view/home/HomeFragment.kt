@@ -1,4 +1,4 @@
-package com.generic.login.view.dashboard
+package com.generic.login.view.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,12 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.RecyclerView
 import com.generic.login.adapter.LoadStateAdapter
 import com.generic.login.databinding.FragmentDashboardBinding
 import com.generic.login.adapter.ProductAdapter
 import com.generic.login.view.base.BaseFragment
-import com.generic.login.viewmodel.DashboardViewModel
+import com.generic.login.viewmodel.HomeViewModel
 import com.generic.login.adapter.ProductComparator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_dashboard.pb_dashboard
@@ -21,8 +20,8 @@ import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class DashboardFragment : BaseFragment<FragmentDashboardBinding, DashboardViewModel>() {
-    override val viewModel: DashboardViewModel by viewModels()
+class HomeFragment : BaseFragment<FragmentDashboardBinding, HomeViewModel>() {
+    override val viewModel: HomeViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

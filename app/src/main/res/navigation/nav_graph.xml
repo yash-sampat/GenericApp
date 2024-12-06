@@ -55,7 +55,7 @@
 
     <fragment
         android:id="@+id/dashboardFragment"
-        android:name="com.generic.login.view.dashboard.DashboardFragment"
+        android:name="com.generic.login.view.home.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_dashboard">
 
@@ -71,7 +71,7 @@
 
     <fragment
         android:id="@+id/productDetailFragment"
-        android:name="com.generic.login.view.dashboard.ProductDetailFragment"
+        android:name="com.generic.login.view.home.ProductDetailFragment"
         android:label="Product Detail"
         tools:layout="@layout/fragment_product_detail">
 

@@ -14,8 +14,8 @@ import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @HiltViewModel
-class DashboardViewModel @Inject constructor(application: Application,
-                                             private val repository: PhotoRepository
+class HomeViewModel @Inject constructor(application: Application,
+                                        private val repository: PhotoRepository
 ) :
     AndroidViewModel(application) {
     fun getPhotosPaged(): Flow<PagingData<Product>> {

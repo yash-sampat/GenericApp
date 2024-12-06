@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/white"
-        tools:context=".view.dashboard.ProductDetailFragment">
+        tools:context=".view.home.ProductDetailFragment">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -40,7 +40,7 @@
 
                 <TextView
                     android:id="@+id/imageSize"
-                    android:text="@{`Size: ` + productModel.imageSize}"
+                    android:text="@{`Size: ` + productModel.imageSize + ` bytes`}"
                     android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
