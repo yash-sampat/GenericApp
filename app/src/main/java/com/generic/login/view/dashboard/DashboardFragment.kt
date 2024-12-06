@@ -5,29 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
+import com.generic.login.adapter.LoadStateAdapter
 import com.generic.login.databinding.FragmentDashboardBinding
-import com.generic.login.utils.Resource
-import com.generic.login.view.adapters.ProductAdapter
+import com.generic.login.adapter.ProductAdapter
 import com.generic.login.view.base.BaseFragment
 import com.generic.login.viewmodel.DashboardViewModel
+import com.generic.login.adapter.ProductComparator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_dashboard.pb_dashboard
-import kotlinx.android.synthetic.main.fragment_dashboard.rv_dashboard
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class DashboardFragment : BaseFragment<FragmentDashboardBinding, DashboardViewModel>() {
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var productAdapter: RecyclerView.Adapter<*>
     override val viewModel: DashboardViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,32 +35,23 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, DashboardViewMo
     ) = FragmentDashboardBinding.inflate(inflater, container, false)
 
     private fun doInit() {
-        viewModel.productData.observe(viewLifecycleOwner, Observer { event ->
-            event.getContentIfNotHandled()?.let { response ->
-                when (response) {
-                    is Resource.Success -> {
-                        hideProgressBar()
-                        response.data?.let { productResponse ->
-                            //response.message?.let { toast(it) }
-                            recyclerView = rv_dashboard.apply{
-                                productAdapter = ProductAdapter(productResponse.hits)
-                                layoutManager = LinearLayoutManager(activity)
-                                adapter = productAdapter
-                            }
-                        }
-                    }
+        showProgressBar()
 
-                    is Resource.Error -> {
-                        hideProgressBar()
-                    }
+        val pagingAdapter = ProductAdapter(ProductComparator)
+        binding.rvDashboard.adapter = pagingAdapter
+        binding.rvDashboard.setHasFixedSize(true)
 
-                    is Resource.Loading -> {
-                        showProgressBar()
-                    }
-                }
+        lifecycleScope.launch {
+            viewModel.getPhotosPaged().collectLatest { pagingData ->
+                hideProgressBar()
+                pagingAdapter.submitData(pagingData)
             }
-        })
-        viewModel.getProducts()
+        }
+        binding.rvDashboard.adapter =
+            pagingAdapter.withLoadStateHeaderAndFooter(
+                header = LoadStateAdapter { pagingAdapter.retry() },
+                footer = LoadStateAdapter { pagingAdapter.retry() }
+            )
     }
 
     private fun showProgressBar() {
