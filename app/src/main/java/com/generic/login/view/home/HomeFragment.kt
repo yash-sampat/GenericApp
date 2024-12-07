@@ -7,13 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.generic.login.adapter.LoadStateAdapter
-import com.generic.login.databinding.FragmentDashboardBinding
 import com.generic.login.adapter.ProductAdapter
+import com.generic.login.adapter.ProductComparator
+import com.generic.login.databinding.FragmentDashboardBinding
 import com.generic.login.view.base.BaseFragment
 import com.generic.login.viewmodel.HomeViewModel
-import com.generic.login.adapter.ProductComparator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_dashboard.pb_dashboard
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -25,7 +24,7 @@ class HomeFragment : BaseFragment<FragmentDashboardBinding, HomeViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        doInit()
+        showInfiniteScrollingList()
     }
 
     override fun getViewBinding(
@@ -33,31 +32,20 @@ class HomeFragment : BaseFragment<FragmentDashboardBinding, HomeViewModel>() {
         container: ViewGroup?
     ) = FragmentDashboardBinding.inflate(inflater, container, false)
 
-    private fun doInit() {
-        showProgressBar()
-
+    private fun showInfiniteScrollingList() = with(binding){
         val pagingAdapter = ProductAdapter(ProductComparator)
-        binding.rvDashboard.adapter = pagingAdapter
-        binding.rvDashboard.setHasFixedSize(true)
+        rvDashboard.adapter = pagingAdapter
+        rvDashboard.setHasFixedSize(true)
 
         lifecycleScope.launch {
             viewModel.getPhotosPaged().collectLatest { pagingData ->
-                hideProgressBar()
                 pagingAdapter.submitData(pagingData)
             }
         }
-        binding.rvDashboard.adapter =
+        rvDashboard.adapter =
             pagingAdapter.withLoadStateHeaderAndFooter(
                 header = LoadStateAdapter { pagingAdapter.retry() },
                 footer = LoadStateAdapter { pagingAdapter.retry() }
             )
-    }
-
-    private fun showProgressBar() {
-        pb_dashboard.visibility = View.VISIBLE
-    }
-
-    private fun hideProgressBar() {
-        pb_dashboard.visibility = View.GONE
     }
 }

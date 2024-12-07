@@ -19,7 +19,6 @@ import com.generic.login.utils.hideKeyboard
 import com.generic.login.view.base.BaseFragment
 import com.generic.login.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.util.regex.Pattern
 
@@ -40,16 +39,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
             requireContext().contentResolver, Settings.Secure.ANDROID_ID
         )
 
-        doinits()
+        setupComponentTree()
     }
 
-    private fun doinits() = with(binding) {
-        gettextwathcerlogin()
+    private fun setupComponentTree() = with(binding) {
+        attachTextWatchers()
         buttonLogin.setOnClickListener {
             hideKeyboard()
             stringEmailorMobile = edEmailormobileLogin.text.toString().trim()
             stringPassword = edPasswordLogin.text.toString().trim()
-            if (!validateUserEmailorMobile() or !validateUserPassword()) {
+            if (!validateUserEmailMobile() or !validateUserPassword()) {
                 return@setOnClickListener
             } else {
                 doLogin()
@@ -94,25 +93,25 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     }
 
     private fun showProgressBar() {
-        progressbar_login.visibility = View.VISIBLE
+        binding.progressbarLogin.visibility = View.VISIBLE
     }
 
     private fun hideProgressBar() {
-        progressbar_login.visibility = View.GONE
+        binding.progressbarLogin.visibility = View.GONE
     }
 
-    private fun validateUserPassword(): Boolean {
-        if (ed_password_login.text.toString()
-                .isEmpty() or !isValidPassword(ed_password_login.text.toString())
+    private fun validateUserPassword(): Boolean = with(binding){
+        if (edPasswordLogin.text.toString()
+                .isEmpty() or !isValidPassword(edPasswordLogin.text.toString())
         ) {
-            tverror_password_viewlogin.error = tverror_password_viewlogin.error
-            tverror_password_viewlogin.visibility = View.VISIBLE
+            tverrorPasswordViewlogin.error = tverrorPasswordViewlogin.error
+            tverrorPasswordViewlogin.visibility = View.VISIBLE
 
             return false
         } else {
-            tverror_password_viewlogin.isEnabled = false
-            tverror_password_viewlogin.visibility = View.GONE
-            tverror_password_viewlogin.error = null
+            tverrorPasswordViewlogin.isEnabled = false
+            tverrorPasswordViewlogin.visibility = View.GONE
+            tverrorPasswordViewlogin.error = null
         }
 
         return true
@@ -132,28 +131,27 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
     }
 
-    private fun validateUserEmailorMobile(): Boolean {
+    private fun validateUserEmailMobile(): Boolean = with(binding) {
         val email: String =
-            ed_emailormobile_login.text.toString().trim()
+            edEmailormobileLogin.text.toString().trim()
 
-        if (ed_emailormobile_login.text.toString()
-                .isEmpty() or !isValidEmailaddress(email) and !validmobilenumber(email)
+        if (email.isEmpty() or !validateEmailAddress(email) and !validateMobileNumber(email)
         ) {
-            tverror_emailormobile_login.error = tverror_emailormobile_login.error
-            tverror_emailormobile_login.visibility = View.VISIBLE
+            tverrorEmailormobileLogin.error = tverrorEmailormobileLogin.error
+            tverrorEmailormobileLogin.visibility = View.VISIBLE
 
             return false
         } else {
-            tverror_emailormobile_login.isEnabled = false
-            tverror_emailormobile_login.visibility = View.GONE
-            tverror_emailormobile_login.error = null
+            tverrorEmailormobileLogin.isEnabled = false
+            tverrorEmailormobileLogin.visibility = View.GONE
+            tverrorEmailormobileLogin.error = null
         }
 
         return true
 
     }
 
-    private fun validmobilenumber(password: String): Boolean {
+    private fun validateMobileNumber(password: String): Boolean {
 
         val p = Pattern.compile("(0/91)?[7-9][0-9]{9}")
 
@@ -162,7 +160,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
     }
 
-    private fun isValidEmailaddress(email: String): Boolean {
+    private fun validateEmailAddress(email: String): Boolean {
 
         val emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
                 "[a-zA-Z0-9_+&*-]+)*@" +
@@ -174,10 +172,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
     }
 
-    private fun gettextwathcerlogin() {
-        ed_emailormobile_login.addTextChangedListener(emailTextWatcher)
-
-        ed_password_login.addTextChangedListener(passwordTextWatcher)
+    private fun attachTextWatchers() = with(binding){
+        edEmailormobileLogin.addTextChangedListener(emailTextWatcher)
+        edPasswordLogin.addTextChangedListener(passwordTextWatcher)
     }
 
     private val emailTextWatcher: TextWatcher = object : TextWatcher {
@@ -186,7 +183,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         }
 
         override fun afterTextChanged(s: Editable) {
-            validateUserEmailorMobile()
+            validateUserEmailMobile()
         }
     }
 

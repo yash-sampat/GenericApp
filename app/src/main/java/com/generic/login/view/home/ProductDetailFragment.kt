@@ -12,7 +12,6 @@ import com.generic.login.model.products.Product
 import com.generic.login.view.base.BaseFragment
 import com.generic.login.viewmodel.ProductDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_product_detail.view.productDetailImage
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
@@ -35,7 +34,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding, Product
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Glide.with(view.context).load(product.webformatURL).centerCrop().into(view.productDetailImage)
+        Glide.with(view.context).load(product.webformatURL).centerCrop().into(binding.productDetailImage)
         binding.apply {
             productModel = product
         }

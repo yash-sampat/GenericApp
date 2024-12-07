@@ -19,7 +19,6 @@ import com.generic.login.utils.hideKeyboard
 import com.generic.login.view.base.BaseFragment
 import com.generic.login.viewmodel.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.util.regex.Pattern
 
@@ -41,11 +40,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
             requireContext().contentResolver, Settings.Secure.ANDROID_ID
         )
 
-        doinits()
+        setupComponentTree()
     }
 
-    private fun doinits() = with(binding) {
-        gettextwathcerregister()
+    private fun setupComponentTree() = with(binding) {
+        attachTextWatchers()
         buttonRegister.setOnClickListener {
             hideKeyboard()
             stringEmailorMobile = edEmailormobileRegister.text.toString().trim()
@@ -91,28 +90,30 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
     }
 
     private fun showProgressBar() {
-        progressbar_register.visibility = View.VISIBLE
+        binding.progressbarRegister.visibility = View.VISIBLE
     }
 
     private fun hideProgressBar() {
-        progressbar_register.visibility = View.GONE
+        binding.progressbarRegister.visibility = View.GONE
     }
 
     private fun validateUserPassword(): Boolean {
-        if (ed_password_register.text.toString()
-                .isEmpty() or !isValidPassword(ed_password_register.text.toString())
-        ) {
-            tverror_password_viewregister.error = tverror_password_viewregister.error
-            tverror_password_viewregister.visibility = View.VISIBLE
+        binding.apply {
+            if (edPasswordRegister.text.toString()
+                    .isEmpty() or !isValidPassword(edPasswordRegister.text.toString())
+            ) {
+                tverrorPasswordViewregister.error = tverrorPasswordViewregister.error
+                tverrorPasswordViewregister.visibility = View.VISIBLE
 
-            return false
-        } else {
-            tverror_password_viewregister.isEnabled = false
-            tverror_password_viewregister.visibility = View.GONE
-            tverror_password_viewregister.error = null
+                return false
+            } else {
+                tverrorPasswordViewregister.isEnabled = false
+                tverrorPasswordViewregister.visibility = View.GONE
+                tverrorPasswordViewregister.error = null
+            }
+
+            return true
         }
-
-        return true
 
     }
 
@@ -130,23 +131,26 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
     }
 
     private fun validateUserEmailorMobile(): Boolean {
-        val email: String =
-            ed_emailormobile_register.text.toString().trim()
+        binding.apply {
+            val email: String =
+                edEmailormobileRegister.text.toString().trim()
 
-        if (ed_emailormobile_register.text.toString()
-                .isEmpty() or !isValidEmailaddress(email) and !validmobilenumber(email)
-        ) {
-            tverror_emailormobile_register.error = tverror_emailormobile_register.error
-            tverror_emailormobile_register.visibility = View.VISIBLE
+            if (edEmailormobileRegister.text.toString()
+                    .isEmpty() or !isValidEmailaddress(email) and !validmobilenumber(email)
+            ) {
+                tverrorEmailormobileRegister.error = tverrorEmailormobileRegister.error
+                tverrorEmailormobileRegister.visibility = View.VISIBLE
 
-            return false
-        } else {
-            tverror_emailormobile_register.isEnabled = false
-            tverror_emailormobile_register.visibility = View.GONE
-            tverror_emailormobile_register.error = null
+                return false
+            } else {
+                tverrorEmailormobileRegister.isEnabled = false
+                tverrorEmailormobileRegister.visibility = View.GONE
+                tverrorEmailormobileRegister.error = null
+            }
+
+            return true
         }
 
-        return true
 
     }
 
@@ -172,44 +176,50 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
     }
 
     private fun validateAge(): Boolean {
-        val age: String =
-            ed_age_register.text.toString().trim()
+        binding.apply {
+            val age: String =
+                edAgeRegister.text.toString().trim()
 
-        if (age.isEmpty()
-        ) {
-            tverror2_age_viewregister.isEnabled = false
-            tverror2_age_viewregister.visibility = View.GONE
-            tverror2_age_viewregister.error = null
+            if (age.isEmpty()
+            ) {
+                tverror2AgeViewregister.isEnabled = false
+                tverror2AgeViewregister.visibility = View.GONE
+                tverror2AgeViewregister.error = null
 
-            tverror_age_viewregister.error = tverror_age_viewregister.error
-            tverror_age_viewregister.visibility = View.VISIBLE
+                tverrorAgeViewregister.error = binding.tverrorAgeViewregister.error
+                tverrorAgeViewregister.visibility = View.VISIBLE
 
-            return false
-        } else if (age.toInt() < 18) {
-            tverror_age_viewregister.isEnabled = false
-            tverror_age_viewregister.visibility = View.GONE
-            tverror_age_viewregister.error = null
+                return false
+            } else if (age.toInt() < 18) {
+                tverrorAgeViewregister.isEnabled = false
+                tverrorAgeViewregister.visibility = View.GONE
+                tverrorAgeViewregister.error = null
 
-            tverror2_age_viewregister.error = tverror2_age_viewregister.error
-            tverror2_age_viewregister.visibility = View.VISIBLE
+                tverror2AgeViewregister.error = binding.tverror2AgeViewregister.error
+                tverror2AgeViewregister.visibility = View.VISIBLE
 
-            return false
-        } else {
-            tverror_age_viewregister.isEnabled = false
-            tverror_age_viewregister.visibility = View.GONE
-            tverror_age_viewregister.error = null
+                return false
+            } else {
+                tverrorAgeViewregister.isEnabled = false
+                tverrorAgeViewregister.visibility = View.GONE
+                tverrorAgeViewregister.error = null
 
-            tverror2_age_viewregister.isEnabled = false
-            tverror2_age_viewregister.visibility = View.GONE
-            tverror2_age_viewregister.error = null
+                tverror2AgeViewregister.isEnabled = false
+                tverror2AgeViewregister.visibility = View.GONE
+                tverror2AgeViewregister.error = null
+
+                return true
+            }
         }
-        return true
     }
 
-    private fun gettextwathcerregister() {
-        ed_emailormobile_register.addTextChangedListener(emailTextWatcher)
+    private fun attachTextWatchers() {
+        binding.apply {
+            edEmailormobileRegister.addTextChangedListener(emailTextWatcher)
+            edPasswordRegister.addTextChangedListener(passwordTextWatcher)
+            edAgeRegister.addTextChangedListener(ageTextWatcher)
+        }
 
-        ed_password_register.addTextChangedListener(passwordTextWatcher)
     }
 
     private val emailTextWatcher: TextWatcher = object : TextWatcher {
@@ -229,6 +239,16 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
 
         override fun afterTextChanged(s: Editable) {
             validateUserPassword()
+        }
+    }
+
+    private val ageTextWatcher: TextWatcher = object :TextWatcher {
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+        }
+
+        override fun afterTextChanged(s: Editable) {
+            validateAge()
         }
     }
 
