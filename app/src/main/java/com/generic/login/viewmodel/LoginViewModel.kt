@@ -39,7 +39,7 @@ class LoginViewModel @Inject constructor(
         _loginData.postValue(Event(Resource.Loading()))
         try {
             if (hasInternetConnection<GenericApp>()) {
-                val response = repository.getLogin(dataModelLoginBody)
+                val response = repository.login(dataModelLoginBody)
                 if (response.isSuccessful) {
                     when (response.body()!!.status) {
                         200 -> {

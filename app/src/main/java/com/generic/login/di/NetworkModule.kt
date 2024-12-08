@@ -94,7 +94,7 @@ object NetworkModule {
     @ExperimentalCoroutinesApi
     @Provides
     @PrimaryApi
-    fun providesLoginRepository(
+    fun providesMainRepository(
         apiService: ApiService
     ): MainApiRepository {
         return MainApiRepository(apiService)

@@ -10,11 +10,11 @@ import javax.inject.Inject
 
 class MainApiRepository @Inject constructor(private val apiService: ApiService) {
 
-    suspend fun getLogin(dataModelLoginBody: DataModelLoginBody): Response<DataModelLoginStatus> {
-        return apiService.getLogin(dataModelLoginBody)
+    suspend fun login(dataModelLoginBody: DataModelLoginBody): Response<DataModelLoginStatus> {
+        return apiService.login(dataModelLoginBody)
     }
 
-    suspend fun getRegistration(dataModelRegisterBody: DataModelRegisterBody): Response<DataModelRegisterStatus> {
-        return apiService.getRegistration(dataModelRegisterBody)
+    suspend fun register(dataModelRegisterBody: DataModelRegisterBody): Response<DataModelRegisterStatus> {
+        return apiService.register(dataModelRegisterBody)
     }
 }

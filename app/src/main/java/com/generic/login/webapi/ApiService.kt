@@ -12,13 +12,13 @@ interface ApiService {
 
     //login
     @POST("/api/login")
-    suspend fun getLogin(
+    suspend fun login(
         @Body dataModelLoginBody: DataModelLoginBody
     ): Response<DataModelLoginStatus>
 
     //register
     @POST("/api/register")
-    suspend fun getRegistration(
+    suspend fun register(
         @Body dataModelRegisterBody: DataModelRegisterBody
     ): Response<DataModelRegisterStatus>
 }

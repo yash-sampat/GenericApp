@@ -39,7 +39,7 @@ class RegisterViewModel @Inject constructor(
         _registerData.postValue(Event(Resource.Loading()))
         try {
             if (hasInternetConnection<GenericApp>()) {
-                val response = repository.getRegistration(dataModelRegisterBody)
+                val response = repository.register(dataModelRegisterBody)
                 if (response.isSuccessful) {
                     when (response.body()!!.status) {
                         200 -> {
