@@ -2,12 +2,12 @@ package com.generic.login.view.login
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.provider.Settings
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -27,9 +27,9 @@ import java.util.regex.Pattern
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     @ExperimentalCoroutinesApi
     override val viewModel: LoginViewModel by viewModels()
-    lateinit var stringEmailorMobile: String
-    lateinit var stringPassword: String
-    lateinit var deviceId: String
+    private lateinit var stringEmailMobile: String
+    private lateinit var stringPassword: String
+    private lateinit var deviceId: String
 
     @SuppressLint("HardwareIds")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,12 +46,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         attachTextWatchers()
         buttonLogin.setOnClickListener {
             hideKeyboard()
-            stringEmailorMobile = edEmailormobileLogin.text.toString().trim()
+            stringEmailMobile = edEmailormobileLogin.text.toString().trim()
             stringPassword = edPasswordLogin.text.toString().trim()
             if (!validateUserEmailMobile() or !validateUserPassword()) {
                 return@setOnClickListener
             } else {
-                doLogin()
+                loginUser()
             }
         }
 
@@ -61,9 +61,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         }
     }
 
-    private fun doLogin() {
+    private fun loginUser() {
         val dataModelLoginBody = DataModelLoginBody(
-            stringEmailorMobile,
+            stringEmailMobile,
             stringPassword, "To sign in existing user", deviceId
         )
         viewModel.loginUser(dataModelLoginBody)
@@ -73,14 +73,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                     is Resource.Success -> {
                         hideProgressBar()
                         response.data?.let { loginResponse ->
-                            findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
+                            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                         }
                     }
 
                     is Resource.Error -> {
                         hideProgressBar()
                         // since we do not have real APIs' now, mock the result and navigate
-                        findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
+                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                         //response.message?.let { toast(it) }
                     }
 

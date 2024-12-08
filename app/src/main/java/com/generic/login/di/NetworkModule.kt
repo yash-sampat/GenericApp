@@ -90,7 +90,7 @@ object NetworkModule {
         return retrofit.create(ImageService::class.java)
     }
 
-    //login
+    //login + register
     @ExperimentalCoroutinesApi
     @Provides
     @PrimaryApi

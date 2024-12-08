@@ -16,14 +16,14 @@ class ProductAdapter(diffCallback: DiffUtil.ItemCallback<Product>) : PagingDataA
     diffCallback
 )  {
 
-    class ViewHolder(val binding: ItemRecyclerBinding): RecyclerView.ViewHolder(binding.root){
+    class ViewHolder(private val binding: ItemRecyclerBinding): RecyclerView.ViewHolder(binding.root){
 
         fun bind(product: Product, position: Int) = with(binding){
             productsModel = product
             Glide.with(binding.root).load(product.previewURL).centerCrop().into(binding.imageView)
 
             binding.root.setOnClickListener{
-                val direction = HomeFragmentDirections.actionDashboardFragmentToDetailFragment(product)
+                val direction = HomeFragmentDirections.actionHomeFragmentToDetailFragment(product)
                 it.findNavController().navigate(direction)
             }
         }

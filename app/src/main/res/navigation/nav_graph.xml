@@ -9,15 +9,15 @@
         android:id="@+id/loginFragment"
         android:name="com.generic.login.view.login.LoginFragment"
         android:label="Sign In"
-        app:startDestination="@id/action_loginFragment_to_dashboardFragment"
+        app:startDestination="@id/action_loginFragment_to_homeFragment"
         tools:layout="@layout/fragment_login">
 
         <action
-            android:id="@+id/action_loginFragment_to_dashboardFragment"
+            android:id="@+id/action_loginFragment_to_homeFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true"
-            app:destination="@id/dashboardFragment"
+            app:destination="@id/homeFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -37,15 +37,15 @@
         android:id="@+id/registerFragment"
         android:name="com.generic.login.view.register.RegisterFragment"
         android:label="Register"
-        app:startDestination="@id/action_registerFragment_to_dashboardFragment"
+        app:startDestination="@id/action_registerFragment_to_homeFragment"
         tools:layout="@layout/fragment_register">
 
         <action
-            android:id="@+id/action_registerFragment_to_dashboardFragment"
+            android:id="@+id/action_registerFragment_to_homeFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true"
-            app:destination="@id/dashboardFragment"
+            app:destination="@id/homeFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -54,13 +54,13 @@
     </fragment>
 
     <fragment
-        android:id="@+id/dashboardFragment"
+        android:id="@+id/homeFragment"
         android:name="com.generic.login.view.home.HomeFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_dashboard">
+        tools:layout="@layout/fragment_home">
 
         <action
-            android:id="@+id/action_dashboardFragment_to_detailFragment"
+            android:id="@+id/action_homeFragment_to_detailFragment"
             app:destination="@id/productDetailFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"

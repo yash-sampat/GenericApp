@@ -2,10 +2,10 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-parcelize'
-    id 'kotlin-kapt'
-    id 'com.google.devtools.ksp'
     id 'androidx.navigation.safeargs'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.devtools.ksp'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -39,6 +39,10 @@ android {
         jvmTarget = '1.8'
     }
     namespace 'com.generic.login'
+
+    hilt {
+        enableAggregatingTask = true
+    }
 }
 
 dependencies {

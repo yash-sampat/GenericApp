@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initViews(binding)
-        observeNavElements(binding, navHostFragment.navController)
+        observeNavElements(navHostFragment.navController)
 
     }
 
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             appBarConfiguration = AppBarConfiguration(
                 setOf(
                     R.id.loginFragment,
-                    R.id.dashboardFragment
+                    R.id.homeFragment
                 )
             )
             setupActionBarWithNavController(this, appBarConfiguration)
@@ -46,12 +46,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun observeNavElements(binding: ActivityMainBinding, navController: NavController) {
+    private fun observeNavElements(navController: NavController) {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
 
-                R.id.dashboardFragment -> {
+                R.id.homeFragment -> {
                     supportActionBar!!.setDisplayShowTitleEnabled(true)
                 }
                 R.id.loginFragment -> {

@@ -2,12 +2,12 @@ package com.generic.login.view.register
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.provider.Settings
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -27,10 +27,10 @@ import java.util.regex.Pattern
 class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel>() {
     @ExperimentalCoroutinesApi
     override val viewModel: RegisterViewModel by viewModels()
-    lateinit var stringEmailorMobile: String
-    lateinit var stringPassword: String
-    lateinit var stringAge: String
-    lateinit var deviceId: String
+    private lateinit var stringEmailMobile: String
+    private lateinit var stringPassword: String
+    private lateinit var stringAge: String
+    private lateinit var deviceId: String
 
     @SuppressLint("HardwareIds")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,37 +47,37 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
         attachTextWatchers()
         buttonRegister.setOnClickListener {
             hideKeyboard()
-            stringEmailorMobile = edEmailormobileRegister.text.toString().trim()
+            stringEmailMobile = edEmailormobileRegister.text.toString().trim()
             stringPassword = edPasswordRegister.text.toString().trim()
             stringAge = edAgeRegister.text.toString().trim()
-            if (!validateUserEmailorMobile() or !validateUserPassword() or !validateAge()) {
+            if (!validateUserEmailMobile() or !validateUserPassword() or !validateAge()) {
                 return@setOnClickListener
             } else {
-                doRegister()
+                registerUser()
             }
         }
     }
 
-    private fun doRegister() {
-        val dataModelregisterBody = DataModelRegisterBody(
-            stringEmailorMobile,
+    private fun registerUser() {
+        val dataModelRegisterBody = DataModelRegisterBody(
+            stringEmailMobile,
             stringPassword, stringAge, "To register new user", deviceId
         )
-        viewModel.registerUser(dataModelregisterBody)
+        viewModel.registerUser(dataModelRegisterBody)
         viewModel.registerData.observe(viewLifecycleOwner, Observer { event ->
             event.getContentIfNotHandled()?.let { response ->
                 when (response) {
                     is Resource.Success -> {
                         hideProgressBar()
                         response.data?.let { registerResponse ->
-                            findNavController().navigate(R.id.action_registerFragment_to_dashboardFragment)
+                            findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
                         }
                     }
 
                     is Resource.Error -> {
                         hideProgressBar()
                         // since we do not have real APIs' now, mock the result and navigate
-                        findNavController().navigate(R.id.action_registerFragment_to_dashboardFragment)
+                        findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
                         //response.message?.let { toast(it) }
                     }
 
@@ -130,13 +130,13 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
 
     }
 
-    private fun validateUserEmailorMobile(): Boolean {
+    private fun validateUserEmailMobile(): Boolean {
         binding.apply {
             val email: String =
                 edEmailormobileRegister.text.toString().trim()
 
             if (edEmailormobileRegister.text.toString()
-                    .isEmpty() or !isValidEmailaddress(email) and !validmobilenumber(email)
+                    .isEmpty() or !isValidEmailAddress(email) and !validateMobileNumber(email)
             ) {
                 tverrorEmailormobileRegister.error = tverrorEmailormobileRegister.error
                 tverrorEmailormobileRegister.visibility = View.VISIBLE
@@ -154,7 +154,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
 
     }
 
-    private fun validmobilenumber(password: String): Boolean {
+    private fun validateMobileNumber(password: String): Boolean {
 
         val p = Pattern.compile("(0/91)?[7-9][0-9]{9}")
 
@@ -163,7 +163,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
 
     }
 
-    private fun isValidEmailaddress(email: String): Boolean {
+    private fun isValidEmailAddress(email: String): Boolean {
 
         val emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
                 "[a-zA-Z0-9_+&*-]+)*@" +
@@ -228,7 +228,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
         }
 
         override fun afterTextChanged(s: Editable) {
-            validateUserEmailorMobile()
+            validateUserEmailMobile()
         }
     }
 

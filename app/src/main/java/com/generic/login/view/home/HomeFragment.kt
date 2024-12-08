@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.generic.login.adapter.LoadStateAdapter
 import com.generic.login.adapter.ProductAdapter
 import com.generic.login.adapter.ProductComparator
-import com.generic.login.databinding.FragmentDashboardBinding
+import com.generic.login.databinding.FragmentHomeBinding
 import com.generic.login.view.base.BaseFragment
 import com.generic.login.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentDashboardBinding, HomeViewModel>() {
+class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     override val viewModel: HomeViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,19 +30,19 @@ class HomeFragment : BaseFragment<FragmentDashboardBinding, HomeViewModel>() {
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ) = FragmentDashboardBinding.inflate(inflater, container, false)
+    ) = FragmentHomeBinding.inflate(inflater, container, false)
 
     private fun showInfiniteScrollingList() = with(binding){
         val pagingAdapter = ProductAdapter(ProductComparator)
-        rvDashboard.adapter = pagingAdapter
-        rvDashboard.setHasFixedSize(true)
+        recyclerView.adapter = pagingAdapter
+        recyclerView.setHasFixedSize(true)
 
         lifecycleScope.launch {
             viewModel.getPhotosPaged().collectLatest { pagingData ->
                 pagingAdapter.submitData(pagingData)
             }
         }
-        rvDashboard.adapter =
+        recyclerView.adapter =
             pagingAdapter.withLoadStateHeaderAndFooter(
                 header = LoadStateAdapter { pagingAdapter.retry() },
                 footer = LoadStateAdapter { pagingAdapter.retry() }
