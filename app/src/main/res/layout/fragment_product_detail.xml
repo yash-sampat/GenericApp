@@ -12,6 +12,7 @@
             type="com.generic.login.model.products.Product" />
 
     </data>
+
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -68,6 +69,7 @@
                 <ImageView
                     android:id="@+id/productDetailImage"
                     android:contentDescription="@string/product_detail_image"
+                    app:imageUrl="@{productModel.webformatURL}"
                     android:adjustViewBounds="true"
                     android:paddingTop="@dimen/_10sdp"
                     android:paddingBottom="@dimen/_10sdp"

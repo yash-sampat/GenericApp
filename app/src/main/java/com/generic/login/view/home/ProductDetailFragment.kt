@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
 import com.generic.login.databinding.FragmentProductDetailBinding
 import com.generic.login.model.products.Product
 import com.generic.login.view.base.BaseFragment
@@ -34,7 +33,6 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding, Product
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Glide.with(view.context).load(product.webformatURL).centerCrop().into(binding.productDetailImage)
         binding.apply {
             productModel = product
         }

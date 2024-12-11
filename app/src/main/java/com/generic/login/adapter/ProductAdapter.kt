@@ -6,7 +6,6 @@ import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.generic.login.databinding.ItemRecyclerBinding
 import com.generic.login.model.products.Product
 import com.generic.login.view.home.HomeFragmentDirections
@@ -19,8 +18,7 @@ class ProductAdapter(diffCallback: DiffUtil.ItemCallback<Product>) : PagingDataA
     class ViewHolder(private val binding: ItemRecyclerBinding): RecyclerView.ViewHolder(binding.root){
 
         fun bind(product: Product, position: Int) = with(binding){
-            productsModel = product
-            Glide.with(binding.root).load(product.previewURL).centerCrop().into(binding.imageView)
+            productModel = product
 
             binding.root.setOnClickListener{
                 val direction = HomeFragmentDirections.actionHomeFragmentToDetailFragment(product)
