@@ -14,7 +14,7 @@
         <!-- Status bar color. -->
         <!-- Customize your theme here. -->
 
-        <item name="android:statusBarColor" >@color/colorbgappbar</item>
+        <item name="android:statusBarColor" >@color/navy_blue</item>
         <item name="android:windowLightStatusBar" >@bool/lightNavEnabled</item>
         <item name="android:navigationBarColor" tools:targetApi="o">@color/colorbgappbar</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">@bool/lightNavEnabled

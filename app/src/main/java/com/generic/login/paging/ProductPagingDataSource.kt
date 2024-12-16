@@ -18,7 +18,7 @@ class ProductPagingDataSource(
             val nextPageNumber = params.key ?: 1
             val response = imageService.getPhotos(
                 PIXABAY_API_KEY,
-                "sports shoes", "photo", true, nextPageNumber, PIXABAY_API_PAGE_SIZE, false
+                "expensive supercars", "photo", true, nextPageNumber, PIXABAY_API_PAGE_SIZE, false
             )
             val responseData = mutableListOf<Product>()
             val data = response.body()?.hits ?: emptyList()
