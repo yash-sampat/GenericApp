@@ -1,11 +1,12 @@
 # GenericApp
-Generic Login App
+Generic Login App with Master/Detail Flow
 
-Retrofit Api Calls With MVVM, Dagger, Repository Pattern (Clean Architecture)
+REST API Calls With Retrofit, MVVM, Dagger, Repository Pattern (Clean Architecture)
 
 (Kotlin, Coroutines, LiveData, Flow,
-Dagger-Hilt , MVVM, Repository Pattern,
-Retrofit-OkHttp, Glide, Custom Validation)
+Dagger-Hilt, MVVM, Repository Pattern,
+Retrofit-OkHttp, Pagination, Data Binding, 
+Fragments, Glide, Custom Validation)
 
 Gradle version - 8.7
 
